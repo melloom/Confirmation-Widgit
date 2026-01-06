@@ -7,7 +7,10 @@ app.disableHardwareAcceleration();
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({
+  const iconPath = path.join(__dirname, 'icon.png');
+  const iconExists = require('fs').existsSync(iconPath);
+  
+  const windowOptions = {
     width: 400,
     height: 600,
     frame: false,
@@ -15,13 +18,19 @@ function createWindow() {
     alwaysOnTop: true,
     resizable: true,
     skipTaskbar: true,
-    icon: path.join(__dirname, 'icon.png'),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: false
     }
-  });
+  };
+  
+  // Only set icon if it exists
+  if (iconExists) {
+    windowOptions.icon = iconPath;
+  }
+  
+  mainWindow = new BrowserWindow(windowOptions);
 
   mainWindow.loadFile('index.html');
 

@@ -15,34 +15,47 @@ document.addEventListener('DOMContentLoaded', () => {
         const originalText = downloadBtn.innerHTML;
         downloadBtn.innerHTML = '<span class="download-icon">⬇</span><span>Starting Download...</span>';
         downloadBtn.style.opacity = '0.8';
+        downloadBtn.style.pointerEvents = 'none';
         
-        // Create download link
-        const link = document.createElement('a');
-        link.href = downloadUrl;
-        link.download = fileName;
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        
-        // Trigger download
-        setTimeout(() => {
-            try {
-                link.click();
-                downloadBtn.innerHTML = '<span class="download-icon">✓</span><span>Download Started!</span>';
+        // Check if file exists first
+        fetch(downloadUrl, { method: 'HEAD' })
+            .then(response => {
+                if (response.ok) {
+                    // File exists, proceed with download
+                    const link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.download = fileName;
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    downloadBtn.innerHTML = '<span class="download-icon">✓</span><span>Download Started!</span>';
+                    setTimeout(() => {
+                        downloadBtn.innerHTML = originalText;
+                        downloadBtn.style.opacity = '1';
+                        downloadBtn.style.pointerEvents = 'auto';
+                    }, 2000);
+                } else {
+                    // File doesn't exist
+                    throw new Error('File not found');
+                }
+            })
+            .catch(error => {
+                // File not available - show helpful message
+                downloadBtn.innerHTML = '<span class="download-icon">⚠</span><span>File Not Available</span>';
+                downloadBtn.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+                
+                // Show alert with instructions
                 setTimeout(() => {
+                    alert('The installer file is not yet available on the server.\n\nTo make it available:\n1. Build the app using: npm run build\n2. Copy the file from dist/ folder to website/downloads/ folder\n3. Deploy to Netlify');
+                    
                     downloadBtn.innerHTML = originalText;
                     downloadBtn.style.opacity = '1';
-                }, 2000);
-            } catch (error) {
-                // If download fails, try opening in new window
-                window.open(downloadUrl, '_blank');
-                downloadBtn.innerHTML = '<span class="download-icon">↗</span><span>Opening Download...</span>';
-                setTimeout(() => {
-                    downloadBtn.innerHTML = originalText;
-                    downloadBtn.style.opacity = '1';
-                }, 2000);
-            }
-            document.body.removeChild(link);
-        }, 100);
+                    downloadBtn.style.pointerEvents = 'auto';
+                    downloadBtn.style.background = 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)';
+                }, 500);
+            });
     });
     
     // Smooth scroll for anchor links

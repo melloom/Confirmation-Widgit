@@ -8,6 +8,7 @@
     "dev": "electron .",
     "build": "electron-builder",
     "build:win": "electron-builder --win",
+    "build:no-icon": "electron-builder --config.win.icon= --config.icon=",
     "dist": "electron-builder --publish=never"
   },
   "keywords": [
