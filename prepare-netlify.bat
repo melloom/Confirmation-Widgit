@@ -1,4 +1,5 @@
 @echo off
+REM PowerShell users: Run with .\prepare-netlify.bat
 echo ========================================
 echo Preparing files for Netlify deployment
 echo ========================================
