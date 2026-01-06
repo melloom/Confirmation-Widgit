@@ -1,0 +1,64 @@
+{
+  "name": "confirmation-widget",
+  "version": "1.0.0",
+  "description": "Long Home Confirmation Call Script Helper - Streamline your appointment confirmation calls",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "dist": "electron-builder --publish=never"
+  },
+  "keywords": [
+    "electron",
+    "widget",
+    "confirmation",
+    "long-home",
+    "appointment"
+  ],
+  "author": "Long Home",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.longhome.confirmation-helper",
+    "productName": "Long Home Confirmation Helper",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/**/*",
+      "!website/**/*",
+      "!dist/**/*",
+      "!*.md",
+      "!package-lock.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

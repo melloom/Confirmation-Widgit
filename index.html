@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Long Home Confirmation Call Script Helper - Streamline your appointment confirmation calls">
+    <meta name="author" content="Long Home">
+    <title>Long Home - Confirmation Helper</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="widget-container">
+        <div class="edge-left"></div>
+        <div class="edge-right"></div>
+        <div class="widget-header">
+            <h2>Confirmation Helper</h2>
+            <div class="header-buttons">
+                <button class="minimize-btn" id="minimizeBtn">−</button>
+                <button class="close-btn" id="closeBtn">×</button>
+            </div>
+        </div>
+        
+        <div class="widget-content" id="widgetContent">
+            <!-- Initial state: Select confirmation type -->
+            <div class="step" id="step1">
+                <h3>Select Confirmation Type</h3>
+                <div class="button-group">
+                    <button class="confirmation-btn" data-type="roof">Roof</button>
+                    <button class="confirmation-btn" data-type="bath">Bath</button>
+                </div>
+            </div>
+
+            <!-- Data entry step -->
+            <div class="step hidden" id="step1_5">
+                <h3>Enter Appointment Details</h3>
+                <div class="question-container" id="dataEntryContainer">
+                    <!-- Data entry fields will be inserted here -->
+                </div>
+                <div class="button-group">
+                    <button class="action-btn" id="startScriptBtn">Start Script</button>
+                </div>
+            </div>
+
+            <!-- Script prompts step -->
+            <div class="step hidden" id="step2">
+                <h3 id="questionTitle">📞 Follow the Script</h3>
+                <div class="question-container" id="questionContainer">
+                    <!-- Script prompts will be dynamically inserted here -->
+                </div>
+                <div class="button-group">
+                    <button class="action-btn" id="nextBtn">Next</button>
+                </div>
+            </div>
+
+            <!-- Completion step -->
+            <div class="step hidden" id="step3">
+                <div class="completion-message">
+                    <h3>✓ Confirmation Complete!</h3>
+                    <p id="completionText"></p>
+                    <div class="button-group">
+                        <button class="action-btn" id="viewScriptBtn">View Confirmation Script</button>
+                        <button class="action-btn" id="restartBtn">Start New Confirmation</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Script display step -->
+            <div class="step hidden" id="step4">
+                <div class="script-container">
+                    <h3>📞 Confirmation Script</h3>
+                    <div class="script-text" id="scriptText"></div>
+                    <div class="button-group">
+                        <button class="action-btn" id="copyScriptBtn">Copy Script</button>
+                        <button class="action-btn" id="backToSummaryBtn">Back to Summary</button>
+                        <button class="action-btn" id="restartBtn2">Start New Confirmation</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
+
