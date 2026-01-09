@@ -1,0 +1,26 @@
+[build]
+  publish = "website"
+  command = "echo 'No build needed for static site'"
+
+# Redirect for download
+[[redirects]]
+  from = "/download"
+  to = "/downloads/Long Home Confirmation Helper Setup.exe"
+  status = 200
+  force = true
+
+# Headers for .exe files to force download
+[[headers]]
+  for = "/downloads/*.exe"
+  [headers.values]
+    Content-Type = "application/octet-stream"
+    Content-Disposition = "attachment"
+
+# Headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+

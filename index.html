@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Long Home Confirmation Call Script Helper - Streamline your appointment confirmation calls">
+    <meta name="author" content="Long Home">
+    <title>Long Home - Confirmation Helper</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="widget-shell">
+            <div class="widget-header">
+                <div class="title-block">
+                    <p class="eyebrow">Appointment concierge</p>
+                    <h2>Confirmation Helper</h2>
+                    <p class="subtitle">Polished, guided, and ready for live calls.</p>
+                </div>
+                <div class="header-buttons">
+                    <button class="cancel-btn" id="cancelBtn" title="Cancellation Flow">⚠</button>
+                    <button class="minimize-btn" id="minimizeBtn">−</button>
+                    <button class="close-btn" id="closeBtn">×</button>
+                </div>
+            </div>
+
+            <div class="status-row">
+                <div class="pill success"><span class="pill-dot"></span>Ready to confirm</div>
+                <div class="pill info">Script-assisted · 60–90 mins</div>
+                <div class="pill muted">Saves your name for next call</div>
+            </div>
+
+            <div class="widget-content" id="widgetContent">
+                <div class="intro-card">
+                    <div class="intro-text">
+                        <p class="eyebrow">Playbook</p>
+                        <h3>Pick a flow, lock a slot, guide the conversation.</h3>
+                        <p>Fewer clicks, clearer hand-offs, and a ready-to-send script when you are done.</p>
+                    </div>
+                    <div class="highlights">
+                        <div class="highlight"><span>1</span><p>Select roof or bath</p></div>
+                        <div class="highlight"><span>2</span><p>Lock the date & time</p></div>
+                        <div class="highlight"><span>3</span><p>Walk the caller through prompts</p></div>
+                    </div>
+                </div>
+
+                <!-- Initial state: Select confirmation type -->
+                <div class="step" id="step1">
+                    <div class="step-header">
+                        <p class="eyebrow">Step 1</p>
+                        <h3>Select confirmation type</h3>
+                        <p class="hint">Tailored copy for each product line.</p>
+                    </div>
+                    <div class="button-group type-buttons">
+                        <button class="confirmation-btn" data-type="roof">Roof Confirmation</button>
+                        <button class="confirmation-btn" data-type="bath">Bath Confirmation</button>
+                    </div>
+                </div>
+
+                <!-- Data entry step -->
+                <div class="step hidden" id="step1_5">
+                    <div class="step-header">
+                        <p class="eyebrow">Step 2</p>
+                        <h3>Enter appointment details</h3>
+                        <p class="hint">Quick picks for dates and curated time slots.</p>
+                    </div>
+                    <div class="question-container" id="dataEntryContainer">
+                        <!-- Data entry fields will be inserted here -->
+                    </div>
+                    <div class="button-group">
+                        <button class="action-btn" id="startScriptBtn">Start Script</button>
+                    </div>
+                </div>
+
+                <!-- Script prompts step -->
+                <div class="step hidden" id="step2">
+                    <div class="step-header">
+                        <p class="eyebrow">Live call</p>
+                        <h3 id="questionTitle">Follow the script</h3>
+                        <p class="hint">Use the prompts, capture decisions, and keep momentum.</p>
+                    </div>
+                    <div class="question-container" id="questionContainer">
+                        <!-- Script prompts will be dynamically inserted here -->
+                    </div>
+                    <div class="button-group">
+                        <button class="action-btn" id="nextBtn">Next</button>
+                    </div>
+                </div>
+
+                <!-- Completion step -->
+                <div class="step hidden" id="step3">
+                    <div class="completion-message">
+                        <p class="eyebrow">Wrapped</p>
+                        <h3>✓ Confirmation complete</h3>
+                        <p class="hint">Copy the ready-to-send script or jump straight into a new call.</p>
+                        <p id="completionText"></p>
+                        <div class="button-group dual">
+                            <button class="action-btn" id="viewScriptBtn">View Confirmation Script</button>
+                            <button class="action-btn ghost" id="restartBtn">Start New Confirmation</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Script display step -->
+                <div class="step hidden" id="step4">
+                    <div class="script-container">
+                        <div class="step-header">
+                            <p class="eyebrow">Full transcript</p>
+                            <h3>📞 Confirmation Script</h3>
+                        </div>
+                        <div class="script-text" id="scriptText"></div>
+                        <div class="button-group triple">
+                            <button class="action-btn" id="copyScriptBtn">Copy Script</button>
+                            <button class="action-btn ghost" id="backToSummaryBtn">Back to Summary</button>
+                            <button class="action-btn" id="restartBtn2">Start New Confirmation</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
+
