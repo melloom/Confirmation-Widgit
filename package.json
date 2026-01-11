@@ -74,14 +74,19 @@
       "title": "${productName} ${version}",
       "icon": "icon.png",
       "background": null,
+      "window": {
+        "width": 660,
+        "height": 400
+      },
       "contents": [
         {
-          "x": 110,
-          "y": 150
+          "x": 130,
+          "y": 220,
+          "type": "file"
         },
         {
-          "x": 240,
-          "y": 150,
+          "x": 410,
+          "y": 220,
           "type": "link",
           "path": "/Applications"
         }
