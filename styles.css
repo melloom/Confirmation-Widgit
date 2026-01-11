@@ -30,6 +30,7 @@ body {
 .widget-shell {
     width: 100%;
     height: 100vh;
+    min-height: 450px;
     background: var(--panel);
     border: 1px solid var(--border);
     border-radius: 20px;
@@ -39,6 +40,21 @@ body {
     flex-direction: column;
     position: relative;
     overflow: hidden;
+}
+
+/* Visual resize indicator in bottom-right corner */
+.widget-shell::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(-45deg, transparent 40%, rgba(255, 255, 255, 0.08) 40%, rgba(255, 255, 255, 0.08) 45%, transparent 45%, transparent 55%, rgba(255, 255, 255, 0.08) 55%, rgba(255, 255, 255, 0.08) 60%, transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+    border-radius: 0 0 20px 0;
 }
 
 .widget-header {
@@ -112,6 +128,20 @@ body {
 .cancel-btn:hover {
     background: rgba(239, 68, 68, 0.3);
     border-color: rgba(239, 68, 68, 0.6);
+}
+
+/* Confirmation flow state - green gradient with checkmark */
+.cancel-btn-confirmation-flow {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border-color: rgba(34, 197, 94, 0.5);
+    color: #04101f;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.cancel-btn-confirmation-flow:hover {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    border-color: rgba(34, 197, 94, 0.7);
+    box-shadow: 0 6px 16px rgba(34, 197, 94, 0.4);
 }
 
 

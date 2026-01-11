@@ -627,19 +627,97 @@ minimizeBtn.addEventListener('click', () => {
     ipcRenderer.send('minimize-window');
 });
 
-// Cancellation button - starts cancellation retention flow
+// Function to switch back to confirmation flow from cancellation flow
+function switchToConfirmationFlow() {
+    // Reset cancellation flow state
+    isCancellationFlow = false;
+    currentType = null;
+    
+    // Clear cancellation-specific data
+    appointmentData.cancellationReason = null;
+    
+    // Reset prompt tracking
+    currentPromptIndex = 0;
+    completedPrompts = {};
+    
+    // Hide all steps
+    step1_5.classList.add('hidden');
+    step2.classList.add('hidden');
+    step3.classList.add('hidden');
+    step4.classList.add('hidden');
+    
+    // Show intro card and status row
+    const introCard = document.querySelector('.intro-card');
+    const statusRow = document.querySelector('.status-row');
+    if (introCard) {
+        introCard.classList.remove('hidden');
+        introCard.style.display = '';
+    }
+    if (statusRow) {
+        statusRow.classList.remove('hidden');
+        statusRow.style.display = '';
+    }
+    
+    // Clear question containers
+    if (questionContainer) {
+        questionContainer.innerHTML = '';
+    }
+    if (dataEntryContainer) {
+        dataEntryContainer.innerHTML = '';
+    }
+    
+    // Return to Step 1 (roof/bath selection)
+    step1.classList.remove('hidden');
+    
+    // Update cancel button appearance
+    updateCancelButtonState();
+    
+    // Scroll to top
+    const widgetContent = document.getElementById('widgetContent');
+    if (widgetContent) {
+        widgetContent.scrollTop = 0;
+    }
+}
+
+// Function to update cancel button state based on current flow
+function updateCancelButtonState() {
+    if (!cancelBtn) return;
+    
+    if (isCancellationFlow) {
+        // In cancellation flow: show ✓ with green gradient and "Switch to Confirmation Flow" tooltip
+        cancelBtn.textContent = '✓';
+        cancelBtn.setAttribute('title', 'Switch to Confirmation Flow');
+        cancelBtn.classList.add('cancel-btn-confirmation-flow');
+    } else {
+        // In confirmation flow: show ⚠ with default styling and "Cancellation Flow" tooltip
+        cancelBtn.textContent = '⚠';
+        cancelBtn.setAttribute('title', 'Cancellation Flow');
+        cancelBtn.classList.remove('cancel-btn-confirmation-flow');
+    }
+}
+
+// Cancellation button - toggles between confirmation and cancellation flows
 if (cancelBtn) {
     cancelBtn.addEventListener('click', () => {
+        // If we're in cancellation flow, switch back to confirmation flow
+        if (isCancellationFlow) {
+            switchToConfirmationFlow();
+            return;
+        }
+        
+        // Otherwise, start cancellation flow
         // Check if we have appointment data, if not, show data entry first
         if (!appointmentData.date || !appointmentData.time) {
             // Show data entry for cancellation flow
             isCancellationFlow = true;
             currentType = 'cancellation';
+            updateCancelButtonState();
             showDataEntry();
         } else {
             // Start cancellation flow directly
             isCancellationFlow = true;
             currentType = 'cancellation';
+            updateCancelButtonState();
             startCancellationFlow();
         }
     });
@@ -683,6 +761,10 @@ function startCancellationFlow() {
     
     currentPromptIndex = 0;
     completedPrompts = {};
+    
+    // Update cancel button appearance
+    updateCancelButtonState();
+    
     showPrompt();
 }
 
@@ -1235,6 +1317,9 @@ function resetWidget() {
     // Show step 1 (roof/bath selection)
     step1.classList.remove('hidden');
     
+    // Update cancel button appearance
+    updateCancelButtonState();
+    
     // Scroll to top
     const widgetContent = document.getElementById('widgetContent');
     if (widgetContent) {
@@ -1244,4 +1329,6 @@ function resetWidget() {
 
 // Initialize
 resetWidget();
+// Set initial cancel button state
+updateCancelButtonState();
 

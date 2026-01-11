@@ -13,6 +13,10 @@ function createWindow() {
   const windowOptions = {
     width: 400,
     height: 600,
+    minWidth: 350,
+    minHeight: 450,
+    maxWidth: 800,
+    maxHeight: 1200,
     frame: false,
     transparent: true,
     alwaysOnTop: true,

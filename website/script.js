@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const macDownloadUrl = `${githubBaseUrl}/Long.Home.Confirmation.Helper-1.0.0.dmg`;
     
     // Local download URLs (Windows only - stored in website/downloads folder)
-    const localWindowsSetupUrl = '/downloads/Long Home Confirmation Helper Setup.exe';
-    const localWindowsPortableUrl = '/downloads/Long Home Confirmation Helper.exe';
+    const localWindowsSetupUrl = '/downloads/Long Home Confirmation Helper Setup 1.0.0.exe';
+    const localWindowsPortableUrl = '/downloads/Long Home Confirmation Helper 1.0.0.exe';
     
     // Determine download URLs and file names based on OS
     let primaryUrl, fallbackUrl, fileName, osName;
@@ -28,12 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (isWindows) {
         // Windows: use local download from website/downloads folder
         primaryUrl = localWindowsSetupUrl;
-        fileName = 'Long Home Confirmation Helper Setup.exe';
+        fileName = 'Long Home Confirmation Helper Setup 1.0.0.exe';
         osName = 'Windows';
     } else {
         // Default to Windows for unknown OS
         primaryUrl = localWindowsSetupUrl;
-        fileName = 'Long Home Confirmation Helper Setup.exe';
+        fileName = 'Long Home Confirmation Helper Setup 1.0.0.exe';
         osName = 'Windows';
     }
     
