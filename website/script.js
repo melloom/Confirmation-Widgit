@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
                       navigator.userAgent.toUpperCase().indexOf('WIN') >= 0;
     
     // GitHub release URLs (for Mac downloads)
-    const githubBaseUrl = 'https://github.com/melloom/Confirmation-Widgit/releases/download/v1.0.0';
+    const githubBaseUrl = 'https://github.com/melloom/Confirmation-Widgit/releases/download/V1.0.0';
     const macDownloadUrl = `${githubBaseUrl}/Long.Home.Confirmation.Helper-1.0.0.dmg`;
     
     // Local download URLs (Windows only - stored in website/downloads folder)
@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function handleDownload(e) {
         e.preventDefault();
+        e.stopPropagation();
         
         const button = e.currentTarget;
         const originalHTML = button.innerHTML;
